@@ -21,3 +21,5 @@ chapters:
   title: "Analisis Data Menggunakan Regresi Linier"
 - file: md/11_TugasOpenEO
   title: "PERAMALAN KADAR NITROGEN DIOKSIDA (NOâ‚‚) DI KABUPATEN BOJONEGORO MENGGUNAKAN METODE KNN REGRESSION"
+- file: md/12_Tugas_model
+  title: "Model Explainability dengan Skforecast"
