@@ -174,7 +174,7 @@
 <li class="toctree-l1"><a class="reference internal" href="03_tugas3.html">Data Preparation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_tugas4_jarak.html">Perhitungan Jarak Data Campuran</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_tugas5_missing.html">Proyek Missing Values Inputation + Materi Normalisasi data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_uts.html">Laporan UTS Pengantar Data Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_uts.html">UTS Pengantar Data Mining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_naivebayes.html">Analisis Data Menggunakan Naive Bayes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09_random_forest.html">Analisa Data Menggunakan Random Forest untuk Prediksi pada Dataset Diabetes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="10_analisa_regres_ilinier.html">Analisis Data Menggunakan Regresi Linier</a></li>
@@ -201,6 +201,7 @@
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">PERAMALAN KADAR NITROGEN DIOKSIDA (NOâ‚‚) DI KABUPATEN BOJONEGORO MENGGUNAKAN METODE KNN REGRESSION</a></li>
 <li class="toctree-l1"><a class="reference internal" href="12_Tugas_model.html">Model Explainability dengan Skforecast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_UAS_datamining.html">UAS Data Mining: Prediksi Performa Akademik Mahasiswa Menggunakan Decision Tree</a></li>
 </ul>
 
     </div>
@@ -421,7 +422,6 @@
 <h1>PERAMALAN KADAR NITROGEN DIOKSIDA (NO₂) DI KABUPATEN BOJONEGORO MENGGUNAKAN METODE KNN REGRESSION<a class="headerlink" href="#peramalan-kadar-nitrogen-dioksida-no2-di-kabupaten-bojonegoro-menggunakan-metode-knn-regression" title="Link to this heading">#</a></h1>
 <section id="latar-belakang">
 <h2>Latar Belakang<a class="headerlink" href="#latar-belakang" title="Link to this heading">#</a></h2>
-<hr class="docutils" />
 <p>Nitrogen Dioksida (NO₂) merupakan salah satu jenis polutan udara yang dihasilkan dari proses pembakaran bahan bakar fosil, kendaraan bermotor, aktivitas industri, serta pembangkit energi. Konsentrasi NO₂ yang tinggi di atmosfer dapat memberikan dampak negatif terhadap kesehatan manusia maupun lingkungan. Paparan gas NO₂ secara terus menerus dapat menyebabkan gangguan sistem pernapasan, iritasi paru-paru, serta memperburuk penyakit asma dan bronkitis.</p>
 <p>Kabupaten Bojonegoro merupakan salah satu wilayah yang mengalami perkembangan aktivitas industri, transportasi, dan pertumbuhan penduduk yang cukup pesat. Kondisi tersebut berpotensi meningkatkan kadar polutan udara, khususnya Nitrogen Dioksida (NO₂). Oleh karena itu, diperlukan analisis terhadap perubahan kadar NO₂ untuk mengetahui kondisi kualitas udara pada wilayah tersebut.</p>
 <p>Pemanfaatan teknologi penginderaan jauh menggunakan satelit Sentinel-5P memungkinkan proses pengambilan data kualitas udara dilakukan secara lebih luas dan efisien. Data satelit tersebut dapat dimanfaatkan untuk melakukan analisis serta prediksi kadar NO₂ berdasarkan data historis yang tersedia.</p>
@@ -429,7 +429,6 @@
 </section>
 <section id="pengumpulan-data">
 <h2>1. Pengumpulan Data<a class="headerlink" href="#pengumpulan-data" title="Link to this heading">#</a></h2>
-<hr class="docutils" />
 <p>Pada tahap ini dilakukan proses pengambilan data time series harian kadar Nitrogen Dioksida (NO₂) di wilayah Kabupaten Bojonegoro menggunakan data satelit Sentinel-5P. Data diperoleh melalui layanan OpenEO API yang terhubung dengan Copernicus Data Space Ecosystem.</p>
 <p>Sebelum melakukan pengambilan data, pengguna perlu membuat akun terlebih dahulu pada website Copernicus Data Space Ecosystem melalui link berikut:</p>
 <p><a class="reference external" href="https://dataspace.copernicus.eu/">https://dataspace.copernicus.eu/</a></p>
@@ -441,7 +440,6 @@
 <p>Pada penelitian ini digunakan data kadar NO₂ harian di wilayah Kabupaten Bojonegoro dengan rentang waktu selama dua tahun.</p>
 <section id="install-library-openeo">
 <h3>Install Library OpenEO<a class="headerlink" href="#install-library-openeo" title="Link to this heading">#</a></h3>
-<hr class="docutils" />
 <p>Sebelum melakukan proses pengambilan data satelit, terlebih dahulu dilakukan instalasi library <code class="docutils literal notranslate"><span class="pre">openeo</span></code>. Library ini digunakan untuk menghubungkan Python dengan layanan OpenEO API agar dapat mengambil data satelit Sentinel-5P secara langsung.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">openeo</span>
 

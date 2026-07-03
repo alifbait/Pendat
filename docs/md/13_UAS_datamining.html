@@ -1,0 +1,969 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>UAS Data Mining: Prediksi Performa Akademik Mahasiswa Menggunakan Decision Tree &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'md/13_UAS_datamining';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Model Explainability dengan Skforecast" href="12_Tugas_model.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Mata kuliah Penambangan Data
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_tugas1.html">Business Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_tugas2.html">Data Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_tugas3.html">Data Preparation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_tugas4_jarak.html">Perhitungan Jarak Data Campuran</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_tugas5_missing.html">Proyek Missing Values Inputation + Materi Normalisasi data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_uts.html">UTS Pengantar Data Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_naivebayes.html">Analisis Data Menggunakan Naive Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_random_forest.html">Analisa Data Menggunakan Random Forest untuk Prediksi pada Dataset Diabetes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_analisa_regres_ilinier.html">Analisis Data Menggunakan Regresi Linier</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="11_TugasOpenEO.html">PERAMALAN KADAR NITROGEN DIOKSIDA (NOâ‚‚) DI KABUPATEN BOJONEGORO MENGGUNAKAN METODE KNN REGRESSION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Tugas_model.html">Model Explainability dengan Skforecast</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">UAS Data Mining: Prediksi Performa Akademik Mahasiswa Menggunakan Decision Tree</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/alifbait/pendata.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/alifbait/pendata.git/issues/new?title=Issue%20on%20page%20%2Fmd/13_UAS_datamining.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/md/13_UAS_datamining.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>UAS Data Mining: Prediksi Performa Akademik Mahasiswa Menggunakan Decision Tree</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">Pendahuluan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding">Business Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">Data Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data Preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-dataset">Import Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konversi-tipe-data-target">Konversi Tipe Data Target</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#column-filter-seleksi-atribut">Column Filter (Seleksi Atribut)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pembagian-data-table-partitioner">Pembagian Data (Table Partitioner)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catatan-normalisasi">Catatan Normalisasi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metode-yang-digunakan">Metode yang Digunakan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">Workflow KNIME</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-decision-tree-learner">Konfigurasi Decision Tree Learner</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-evaluasi-model">Hasil Evaluasi Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-faktor-yang-mempengaruhi-nilai-mahasiswa">Analisis Faktor yang Mempengaruhi Nilai Mahasiswa</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urutan-atribut-pemisah-splitter-pada-level-teratas">Urutan Atribut Pemisah (Splitter) pada Level Teratas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi">Interpretasi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saran">Saran</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-pustaka">Daftar Pustaka</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="uas-data-mining-prediksi-performa-akademik-mahasiswa-menggunakan-decision-tree">
+<h1>UAS Data Mining: Prediksi Performa Akademik Mahasiswa Menggunakan Decision Tree<a class="headerlink" href="#uas-data-mining-prediksi-performa-akademik-mahasiswa-menggunakan-decision-tree" title="Link to this heading">#</a></h1>
+<p><strong>Nama Mahasiswa:</strong> Alif Baiatur Ridhwan El Habibie
+<strong>NIM:</strong> 240411100156
+<strong>Mata Kuliah:</strong> Penambangan Data
+<strong>Program Studi:</strong> Teknik Informatika
+<strong>Universitas:</strong> Universitas Trunojoyo Madura</p>
+<section id="pendahuluan">
+<h2>Pendahuluan<a class="headerlink" href="#pendahuluan" title="Link to this heading">#</a></h2>
+<p>Evaluasi terhadap performa akademik mahasiswa merupakan salah satu aspek penting dalam dunia pendidikan tinggi karena berkaitan langsung dengan kualitas pembelajaran dan keberhasilan studi mahasiswa. Nilai akademik yang diperoleh mahasiswa sering kali digunakan sebagai indikator utama untuk menilai tingkat pemahaman materi, konsistensi belajar, serta kemampuan beradaptasi terhadap proses perkuliahan. Namun, penurunan performa akademik sering kali tidak terjadi secara tiba-tiba, melainkan merupakan hasil akumulasi dari berbagai faktor yang berkembang secara bertahap selama masa studi. Kondisi ini membuat identifikasi dini terhadap mahasiswa yang berpotensi mengalami penurunan performa menjadi hal yang penting bagi institusi pendidikan.</p>
+<p>Seiring berkembangnya teknologi informasi, institusi pendidikan saat ini menyimpan data dalam jumlah yang semakin besar, baik berupa data akademik maupun data non-akademik mahasiswa. Data tersebut mencakup berbagai informasi seperti latar belakang keluarga, kebiasaan belajar, tingkat kehadiran, hingga riwayat performa akademik sebelumnya. Sayangnya, kumpulan data tersebut sering kali hanya berfungsi sebagai arsip dan belum dimanfaatkan secara optimal untuk menghasilkan informasi yang bernilai. Dalam konteks ini, <em>data mining</em>, khususnya <em>Educational Data Mining</em> (EDM), hadir sebagai pendekatan yang mampu mengekstraksi pola, hubungan, dan pengetahuan tersembunyi dari data pendidikan sehingga dapat digunakan untuk mendukung proses analisis dan pengambilan keputusan secara lebih efektif.</p>
+<p>Memahami faktor-faktor yang memengaruhi prestasi akademik mahasiswa menjadi langkah penting dalam upaya meningkatkan kualitas pendidikan. Performa akademik tidak hanya dipengaruhi oleh kemampuan intelektual, tetapi juga oleh berbagai faktor lain seperti kondisi keluarga, latar belakang pendidikan orang tua, kedisiplinan mengikuti perkuliahan, kebiasaan belajar, serta target akademik pribadi. Dengan memanfaatkan pendekatan <em>machine learning</em>, pola-pola hubungan antar faktor tersebut dapat dipelajari untuk membangun model prediksi performa akademik secara lebih objektif. Pada penelitian ini, algoritma <strong>Decision Tree</strong> digunakan untuk menganalisis dan memprediksi performa akademik mahasiswa berdasarkan dataset <em>Higher Education Students Performance Evaluation</em>. Metode ini dipilih karena memiliki kemampuan klasifikasi yang baik serta menghasilkan struktur keputusan yang mudah dipahami dan diinterpretasikan, sehingga faktor-faktor yang paling berpengaruh terhadap perolehan nilai mahasiswa dapat diidentifikasi secara lebih jelas.</p>
+</section>
+<section id="business-understanding">
+<h2>Business Understanding<a class="headerlink" href="#business-understanding" title="Link to this heading">#</a></h2>
+<p><strong>Permasalahan yang Ingin Diselesaikan:</strong>
+Bagaimana memprediksi performa akademik mahasiswa (kategori nilai/grade akhir) berdasarkan faktor pribadi, kondisi keluarga, dan kebiasaan belajar mereka sehari-hari menggunakan pendekatan Decision Tree?</p>
+<p><strong>Tujuan Penelitian:</strong></p>
+<ol class="arabic simple">
+<li><p>Mengetahui karakteristik mahasiswa berdasarkan dataset demografi dan kebiasaan belajar.</p></li>
+<li><p>Mengidentifikasi faktor-faktor yang paling dominan dalam memengaruhi perolehan nilai mahasiswa.</p></li>
+<li><p>Membangun model klasifikasi menggunakan algoritma Decision Tree dengan quality measure Gain Ratio untuk memprediksi nilai akhir mahasiswa.</p></li>
+<li><p>Mengevaluasi performa model Decision Tree yang telah dibangun guna mengetahui tingkat akurasi dan keandalannya dalam mengklasifikasikan grade mahasiswa.</p></li>
+</ol>
+<p><strong>Manfaat Penelitian:</strong></p>
+<ul class="simple">
+<li><p><strong>Bagi Mahasiswa:</strong> Membantu mereka menyadari kebiasaan atau faktor apa saja yang dapat berdampak positif maupun negatif terhadap nilai mereka, sehingga dapat memperbaiki pola belajar ke depannya.</p></li>
+<li><p><strong>Bagi Institusi Pendidikan (Dosen &amp; Universitas):</strong> Memberikan wawasan berbasis data untuk mendeteksi lebih awal mahasiswa yang berpotensi memperoleh nilai rendah, sehingga bimbingan atau konseling akademik dapat diberikan secara lebih cepat dan tepat sasaran.</p></li>
+</ul>
+</section>
+<section id="data-understanding">
+<h2>Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h2>
+<p><strong>Sumber Dataset:</strong> Data yang digunakan dalam analisis ini adalah <strong>“Higher Education Students Performance Evaluation Dataset”</strong> yang diperoleh dari <em>UCI Machine Learning Repository</em> (<a class="reference external" href="https://archive.ics.uci.edu/dataset/856/higher+education+students+performance+evaluation">tautan dataset</a>).</p>
+<p><strong>Informasi Dataset:</strong></p>
+<ul class="simple">
+<li><p>Jumlah data: 145 mahasiswa (baris data)</p></li>
+<li><p>Jumlah atribut: 30 atribut input (prediktor, bernomor 1–30), 2 atribut identitas (<code class="docutils literal notranslate"><span class="pre">STUDENT</span> <span class="pre">ID</span></code> dan <code class="docutils literal notranslate"><span class="pre">COURSE</span> <span class="pre">ID</span></code>), dan 1 atribut target (<code class="docutils literal notranslate"><span class="pre">OUTPUT</span> <span class="pre">Grade</span></code>)</p></li>
+<li><p>Target: <code class="docutils literal notranslate"><span class="pre">OUTPUT</span> <span class="pre">Grade</span></code> (atribut yang ingin diprediksi)</p></li>
+<li><p>Tipe data: Kategorikal yang telah di-<em>encode</em> menjadi Integer, serta Integer biasa</p></li>
+<li><p>Missing value: Tidak ditemukan missing value pada dataset (berdasarkan pemeriksaan table view di KNIME)</p></li>
+</ul>
+<p><strong>Pengelompokan Atribut:</strong></p>
+<p>Dataset ini mencakup berbagai variabel yang dapat dikelompokkan menjadi:</p>
+<p><em>Data Pribadi</em></p>
+<ul class="simple">
+<li><p>Umur</p></li>
+<li><p>Jenis kelamin</p></li>
+<li><p>Jenis sekolah asal</p></li>
+<li><p>Beasiswa</p></li>
+<li><p>Pekerjaan sampingan</p></li>
+</ul>
+<p><em>Data Keluarga</em></p>
+<ul class="simple">
+<li><p>Pendidikan ayah</p></li>
+<li><p>Pendidikan ibu</p></li>
+<li><p>Pekerjaan orang tua</p></li>
+<li><p>Status orang tua</p></li>
+</ul>
+<p><em>Kebiasaan Belajar</em></p>
+<ul class="simple">
+<li><p>Jam belajar mingguan (Weekly Study Hours)</p></li>
+<li><p>Kehadiran kuliah (Attendance to Classes)</p></li>
+<li><p>Frekuensi membaca (Reading Frequency, untuk literatur non-ilmiah maupun ilmiah)</p></li>
+<li><p>Pencatatan materi (Taking Notes di kelas)</p></li>
+<li><p>Diskusi kelas</p></li>
+</ul>
+<p><strong>Target</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">OUTPUT</span> <span class="pre">Grade</span></code> merupakan nilai akhir yang merepresentasikan performa mahasiswa. Berikut tabel kategori nilai (dalam format kelas/indeks yang dikategorikan sebagai angka di dataset):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kategori Angka</p></th>
+<th class="head"><p>Interpretasi Huruf</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Fail</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>DD</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>DC</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>CC</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>CB</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>BB</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>BA</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>AA</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="data-preparation">
+<h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Link to this heading">#</a></h2>
+<p>Tahapan persiapan data dilakukan pada <strong>KNIME Analytics Platform</strong> untuk memastikan dataset siap digunakan pada proses pemodelan.</p>
+<section id="import-dataset">
+<h3>Import Dataset<a class="headerlink" href="#import-dataset" title="Link to this heading">#</a></h3>
+<p>Proses import dataset dilakukan menggunakan node <strong>CSV Reader</strong>, yang membaca file dataset mentah ke dalam <em>table format</em> yang terstruktur, menghasilkan 145 baris dan 33 kolom sesuai dengan struktur dataset asli.</p>
+</section>
+<section id="konversi-tipe-data-target">
+<h3>Konversi Tipe Data Target<a class="headerlink" href="#konversi-tipe-data-target" title="Link to this heading">#</a></h3>
+<p>Node <strong>Number to String</strong> digunakan untuk mengubah tipe data kolom target (<code class="docutils literal notranslate"><span class="pre">GRADE</span></code>) dari Integer menjadi String. Hal ini penting agar algoritma Decision Tree memperlakukan nilai 0–7 sebagai label kelas/kategori, bukan sebagai nilai numerik yang bersifat kontinu untuk regresi.</p>
+</section>
+<section id="column-filter-seleksi-atribut">
+<h3>Column Filter (Seleksi Atribut)<a class="headerlink" href="#column-filter-seleksi-atribut" title="Link to this heading">#</a></h3>
+<p>Node <strong>Column Filter</strong> digunakan untuk mengeluarkan (<em>exclude</em>) dua atribut yang tidak relevan sebagai fitur prediktor, yaitu:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">STUDENT</span> <span class="pre">ID</span></code> — bersifat unik per baris sehingga tidak memiliki nilai prediktif</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">COURSE</span> <span class="pre">ID</span></code> — bersifat identifier, bukan karakteristik mahasiswa yang memengaruhi nilai</p></li>
+</ul>
+<p>Setelah proses filtering, dataset yang tersisa memiliki <strong>145 baris dan 31 kolom</strong>, seluruhnya berupa atribut prediktor numerik ditambah kolom target.</p>
+<p><img alt="Column Filter" src="../_images/31_collumnfilter.png" /></p>
+</section>
+<section id="pembagian-data-table-partitioner">
+<h3>Pembagian Data (Table Partitioner)<a class="headerlink" href="#pembagian-data-table-partitioner" title="Link to this heading">#</a></h3>
+<p>Node <strong>Table Partitioner</strong> digunakan untuk membagi dataset menjadi data latih dan data uji dengan konfigurasi:</p>
+<ul class="simple">
+<li><p><strong>First partition type:</strong> Relative (%)</p></li>
+<li><p><strong>Relative size:</strong> 80</p></li>
+<li><p><strong>Sampling strategy:</strong> Linear</p></li>
+</ul>
+<p>Dengan konfigurasi tersebut, dataset terbagi menjadi:</p>
+<ul class="simple">
+<li><p><strong>Data Latih (Training Set):</strong> 116 baris (80% dari 145 data), digunakan untuk melatih model Decision Tree</p></li>
+<li><p><strong>Data Uji (Test Set):</strong> 29 baris (20% dari 145 data), digunakan untuk menguji performa model</p></li>
+</ul>
+<p>Perlu dicatat bahwa strategi <em>sampling</em> yang digunakan adalah <strong>Linear</strong>, bukan Random, sehingga pembagian data dilakukan secara berurutan berdasarkan posisi baris, bukan secara acak.</p>
+<p><img alt="Table Partioner" src="../_images/32_tablepartioner.png" /></p>
+</section>
+<section id="catatan-normalisasi">
+<h3>Catatan Normalisasi<a class="headerlink" href="#catatan-normalisasi" title="Link to this heading">#</a></h3>
+<p>Pada workflow ini, tidak dilakukan tahapan normalisasi data menggunakan node Normalizer, karena seluruh atribut prediktor telah berupa data <em>encoded numerical</em> dengan rentang skala kategori yang relatif kecil dan seragam antar kolom.</p>
+</section>
+</section>
+<section id="modeling">
+<h2>Modeling<a class="headerlink" href="#modeling" title="Link to this heading">#</a></h2>
+<section id="metode-yang-digunakan">
+<h3>Metode yang Digunakan<a class="headerlink" href="#metode-yang-digunakan" title="Link to this heading">#</a></h3>
+<p>Metode penambangan data yang digunakan pada penelitian ini adalah <strong>Decision Tree Classification</strong>.</p>
+<p><strong>Konsep Decision Tree:</strong> Decision Tree (Pohon Keputusan) merupakan teknik klasifikasi yang bekerja secara hierarkis, dengan konsep inti sebagai berikut:</p>
+<ul class="simple">
+<li><p><strong>Root Node (Simpul Akar):</strong> Atribut yang paling signifikan dan berada di puncak pohon, digunakan sebagai pembelahan pertama pada seluruh dataset.</p></li>
+<li><p><strong>Internal Node (Simpul Internal):</strong> Pertanyaan bersyarat atau pengujian atribut lanjutan di bawah Root Node.</p></li>
+<li><p><strong>Leaf Node (Simpul Daun):</strong> Hasil keputusan akhir atau kelas target prediksi, yaitu <code class="docutils literal notranslate"><span class="pre">OUTPUT</span> <span class="pre">Grade</span></code>.</p></li>
+</ul>
+<p><strong>Alasan Pemilihan Decision Tree:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Mudah Dipahami:</strong> Model menghasilkan output berupa aturan (<em>if-then rules</em>) yang transparan dan menyerupai alur penalaran manusia.</p></li>
+<li><p><strong>Mudah Diinterpretasikan:</strong> Bentuk visual pohon memudahkan pembacaan kondisi-kondisi yang menentukan kategori nilai mahasiswa.</p></li>
+<li><p><strong>Dapat Mengidentifikasi Faktor Penting:</strong> Decision Tree secara bawaan melakukan seleksi fitur, menempatkan atribut yang paling berpengaruh pada hirarki teratas pohon.</p></li>
+</ol>
+</section>
+<section id="workflow-knime">
+<h3>Workflow KNIME<a class="headerlink" href="#workflow-knime" title="Link to this heading">#</a></h3>
+<p>Proses training dan testing dibentuk melalui rangkaian node berikut:</p>
+<ul class="simple">
+<li><p><strong>CSV Reader:</strong> Membaca dan mengimpor file dataset mentah berformat <code class="docutils literal notranslate"><span class="pre">.csv</span></code> ke dalam KNIME.</p></li>
+<li><p><strong>Number to String:</strong> Mengubah tipe data kolom target (<code class="docutils literal notranslate"><span class="pre">GRADE</span></code>) dari Integer menjadi String, agar algoritma memperlakukan nilai 0–7 sebagai label kategori, bukan nilai numerik untuk regresi.</p></li>
+<li><p><strong>Column Filter:</strong> Mengeluarkan atribut <code class="docutils literal notranslate"><span class="pre">STUDENT</span> <span class="pre">ID</span></code> dan <code class="docutils literal notranslate"><span class="pre">COURSE</span> <span class="pre">ID</span></code> yang tidak relevan sebagai fitur prediktor.</p></li>
+<li><p><strong>Table Partitioner:</strong> Membagi dataset (145 baris) menjadi Data Latih (80% = 116 data) dan Data Uji (20% = 29 data) menggunakan strategi <em>Linear</em>.</p></li>
+<li><p><strong>Color Manager &amp; Color Appender:</strong> Memberikan penanda warna pada kategori <code class="docutils literal notranslate"><span class="pre">GRADE</span></code> untuk mempermudah visualisasi data pada node-node berikutnya.</p></li>
+<li><p><strong>Decision Tree Learner:</strong> Menerima Data Latih (116 data) dan mempelajari pola untuk membentuk model Decision Tree.</p></li>
+<li><p><strong>Decision Tree Predictor:</strong> Menerapkan model yang telah dilatih pada Data Uji (29 data) untuk memprediksi <code class="docutils literal notranslate"><span class="pre">GRADE</span></code> masing-masing mahasiswa.</p></li>
+<li><p><strong>Scorer:</strong> Membandingkan hasil prediksi dengan label asli, kemudian menghitung akurasi model.</p></li>
+</ul>
+<p><img alt="Workflow KNIME" src="../_images/33_workflow.png" /></p>
+</section>
+<section id="konfigurasi-decision-tree-learner">
+<h3>Konfigurasi Decision Tree Learner<a class="headerlink" href="#konfigurasi-decision-tree-learner" title="Link to this heading">#</a></h3>
+<p>Berikut adalah parameter konfigurasi yang digunakan pada node <strong>Decision Tree Learner</strong>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Nilai/Pengaturan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Class column</p></td>
+<td><p>GRADE</p></td>
+</tr>
+<tr class="row-odd"><td><p>Quality measure</p></td>
+<td><p><strong>Gain Ratio</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Pruning method</p></td>
+<td><p>No pruning</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reduced error pruning</p></td>
+<td><p>Aktif (dicentang)</p></td>
+</tr>
+<tr class="row-even"><td><p>Minimum number of records per node</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number of records to store for view</p></td>
+<td><p>35100</p></td>
+</tr>
+<tr class="row-even"><td><p>Average split point</p></td>
+<td><p>Aktif (dicentang)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number threads</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>Skip nominal columns without domain information</p></td>
+<td><p>Aktif (dicentang)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Force root split column</p></td>
+<td><p>Tidak aktif</p></td>
+</tr>
+<tr class="row-even"><td><p>Binary nominal splits</p></td>
+<td><p>Tidak aktif</p></td>
+</tr>
+<tr class="row-odd"><td><p>No true child strategy (PMML Settings)</p></td>
+<td><p>Return null prediction</p></td>
+</tr>
+<tr class="row-even"><td><p>Missing value strategy (PMML Settings)</p></td>
+<td><p>Last prediction</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img alt="Decicion Tree Learner" src="../_images/34_dcctreelearner.png" /></p>
+<p>Pemilihan <strong>Gain Ratio</strong> sebagai <em>quality measure</em> bertujuan untuk mengatasi kecenderungan bias pada metode Information Gain biasa, yang cenderung memprioritaskan atribut dengan jumlah kategori/nilai unik yang lebih banyak. Gain Ratio menormalisasi nilai gain terhadap jumlah dan ukuran cabang yang dihasilkan, sehingga pemilihan atribut pembagi menjadi lebih adil dan seimbang.</p>
+</section>
+</section>
+<section id="evaluation">
+<h2>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h2>
+<p>Penggunaan node <strong>Scorer</strong> pada KNIME ditujukan untuk mengukur dan memvalidasi tingkat keakuratan model klasifikasi Decision Tree yang telah dilatih, dengan membandingkan hasil prediksi (<code class="docutils literal notranslate"><span class="pre">Prediction</span> <span class="pre">(GRADE)</span></code>) terhadap label kelas asli (<code class="docutils literal notranslate"><span class="pre">GRADE</span></code>) pada Data Uji.</p>
+<section id="accuracy">
+<h3>Accuracy<a class="headerlink" href="#accuracy" title="Link to this heading">#</a></h3>
+<p><strong>Definisi:</strong> Accuracy (Akurasi) adalah ukuran kedekatan hasil prediksi model terhadap label atau nilai aslinya secara keseluruhan pada semua kelas kategori.</p>
+<p><strong>Rumus Accuracy:</strong></p>
+<div class="math notranslate nohighlight">
+\[Accuracy = \frac{\text{True Positive} + \text{True Negative}}{\text{Total Data Uji}}\]</div>
+</section>
+<section id="confusion-matrix">
+<h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h3>
+<p>Evaluasi lebih detail untuk tiap kategori (<code class="docutils literal notranslate"><span class="pre">Fail</span></code>, <code class="docutils literal notranslate"><span class="pre">DD</span></code>, <code class="docutils literal notranslate"><span class="pre">DC</span></code>, dst.) dilakukan melalui matriks konfusi (<em>confusion matrix</em>), dengan elemen sebagai berikut (jika berfokus pada salah satu kelas target):</p>
+<ul class="simple">
+<li><p><strong>True Positive (TP):</strong> Prediksi menyatakan mahasiswa berada di Grade X, dan kenyataannya juga di Grade X.</p></li>
+<li><p><strong>True Negative (TN):</strong> Prediksi menyatakan bukan Grade X, dan kenyataannya juga bukan Grade X.</p></li>
+<li><p><strong>False Positive (FP):</strong> Prediksi menyatakan Grade X, namun kenyataannya bukan Grade X.</p></li>
+<li><p><strong>False Negative (FN):</strong> Prediksi menyatakan bukan Grade X, namun kenyataannya adalah Grade X.</p></li>
+</ul>
+<p><img alt="Confusion Matrix" src="../_images/35_confusionmatrix.png" /></p>
+</section>
+<section id="hasil-evaluasi-model">
+<h3>Hasil Evaluasi Model<a class="headerlink" href="#hasil-evaluasi-model" title="Link to this heading">#</a></h3>
+<p>Berdasarkan output node Scorer, model Decision Tree yang dibangun menghasilkan performa sebagai berikut:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metrik</p></th>
+<th class="head"><p>Nilai</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Total Data Uji</p></td>
+<td><p>29</p></td>
+</tr>
+<tr class="row-odd"><td><p>Total Prediksi Benar</p></td>
+<td><p>12</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Overall Accuracy</strong></p></td>
+<td><p><strong>0.414 (41.4%)</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Cohen’s Kappa</strong></p></td>
+<td><p><strong>0.307</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img alt="accuracy" src="../_images/36_accuracy.png" /></p>
+<p><strong>Interpretasi Overall Accuracy</strong></p>
+<p>Perhitungan akurasi keseluruhan diperoleh dari total prediksi yang benar, yaitu jumlah nilai diagonal pada <em>confusion matrix</em>, kemudian dibagi dengan total data uji.</p>
+<div class="math notranslate nohighlight">
+\[
+Accuracy = \frac{12}{29} = 0,414 \ (41,4\%)
+\]</div>
+<p>Nilai tersebut menunjukkan bahwa dari 29 data uji, model berhasil memprediksi dengan benar sebanyak 12 data.</p>
+<p>Sebagai perbandingan, karena dataset ini memiliki 8 kelas target, yaitu Grade 0 hingga Grade 7, maka apabila prediksi dilakukan secara acak tanpa menggunakan model klasifikasi, baseline accuracy yang diharapkan hanya sebesar:</p>
+<div class="math notranslate nohighlight">
+\[
+Baseline\ Accuracy = \frac{1}{8} = 0,125 \ (12,5\%)
+\]</div>
+<p>Dengan demikian, accuracy sebesar <strong>41,4%</strong> menunjukkan bahwa performa model berada lebih dari tiga kali lipat dibandingkan prediksi acak. Hal ini mengindikasikan bahwa model Decision Tree tidak hanya melakukan klasifikasi secara kebetulan, tetapi mampu mempelajari pola tertentu dari data akademik mahasiswa, meskipun performanya masih dapat ditingkatkan.</p>
+<p><strong>Interpretasi Hasil:</strong></p>
+<ol class="arabic">
+<li><p><strong>Perhitungan Overall Accuracy.</strong> Akurasi keseluruhan diperoleh dari total prediksi yang benar (jumlah nilai diagonal pada confusion matrix) dibagi total data uji:</p>
+<div class="math notranslate nohighlight">
+\[Accuracy = \frac{12}{29} = 0{,}414 \ (41{,}4\%)\]</div>
+<p>Angka ini menunjukkan bahwa dari 29 data uji, model hanya berhasil menebak tepat sebanyak 12 data. Akurasi yang tergolong rendah ini wajar terjadi mengingat target klasifikasi bersifat <em>multi-class</em> dengan 8 kategori nilai (Fail hingga AA), di mana pola kebiasaan mahasiswa pada kategori nilai yang berdekatan (misalnya CC dan CB) cenderung tumpang tindih, sehingga model kesulitan membedakannya secara tegas.</p>
+</li>
+<li><p><strong>Cohen’s Kappa (0,307).</strong> Nilai Cohen’s Kappa sebesar 0,307 berada pada rentang <strong>“Fair Agreement”</strong> (kesesuaian wajar) menurut skala interpretasi Landis &amp; Koch. Hal ini menunjukkan bahwa meskipun akurasi model tergolong rendah, prediksi yang dihasilkan bukan sekadar tebakan acak (<em>random guess</em>), melainkan tetap mengikuti pola aturan (<em>rules</em>) yang terbentuk dari struktur Decision Tree.</p></li>
+<li><p><strong>Variasi performa antar kelas.</strong> Berdasarkan tabel Accuracy Statistics per kelas, terlihat bahwa performa model tidak merata di seluruh kategori nilai. Beberapa kelas seperti Grade 4 memiliki Recall dan Precision yang cukup baik (masing-masing 1,0 dan 0,5), sedangkan kelas lain seperti Grade 6 dan Grade 0 memiliki Recall 0 — menandakan model sama sekali tidak berhasil mengenali data uji pada kategori tersebut. Hal ini kemungkinan disebabkan oleh jumlah data pada kelas-kelas tersebut yang relatif sedikit dalam Data Latih, sehingga model kurang memiliki cukup pola untuk mempelajarinya secara memadai.</p></li>
+</ol>
+</section>
+</section>
+<section id="analisis-faktor-yang-mempengaruhi-nilai-mahasiswa">
+<h2>Analisis Faktor yang Mempengaruhi Nilai Mahasiswa<a class="headerlink" href="#analisis-faktor-yang-mempengaruhi-nilai-mahasiswa" title="Link to this heading">#</a></h2>
+<p>Berdasarkan <em>rule set</em> aktual yang dihasilkan oleh model Decision Tree (dilihat melalui Decision Tree View dengan <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">expanded</span> <span class="pre">levels</span> <span class="pre">=</span> <span class="pre">3</span></code>), berikut adalah struktur pemisahan (<em>split</em>) yang benar-benar terbentuk pada beberapa level teratas pohon:</p>
+<p><img alt="view" src="../_images/37_view.png" /></p>
+<section id="urutan-atribut-pemisah-splitter-pada-level-teratas">
+<h3>Urutan Atribut Pemisah (Splitter) pada Level Teratas<a class="headerlink" href="#urutan-atribut-pemisah-splitter-pada-level-teratas" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Level</p></th>
+<th class="head"><p>Node Induk</p></th>
+<th class="head"><p>Atribut Pemisah</p></th>
+<th class="head"><p>Nama Atribut</p></th>
+<th class="head"><p>Titik Pemisah (Threshold)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Root</p></td>
+<td><p>—</p></td>
+<td><p>Kolom 29</p></td>
+<td><p>Cumulative GPA semester lalu</p></td>
+<td><p>≤ 4,50 vs &gt; 4,50</p></td>
+</tr>
+<tr class="row-odd"><td><p>2 (cabang kiri)</p></td>
+<td><p>Root ≤ 4,50</p></td>
+<td><p>Kolom 30</p></td>
+<td><p>Expected Cumulative GPA saat lulus</p></td>
+<td><p>≤ 3,50 vs &gt; 3,50</p></td>
+</tr>
+<tr class="row-even"><td><p>2 (cabang kanan)</p></td>
+<td><p>Root &gt; 4,50</p></td>
+<td><p>Kolom 11</p></td>
+<td><p>Pendidikan Ibu</p></td>
+<td><p>≤ 3,50 vs &gt; 3,50</p></td>
+</tr>
+<tr class="row-odd"><td><p>3 (cabang kiri-kiri)</p></td>
+<td><p>Node 30 ≤ 3,50</p></td>
+<td><p>Kolom 17</p></td>
+<td><p>Jam belajar mingguan</p></td>
+<td><p>≤ 3,50 vs &gt; 3,50</p></td>
+</tr>
+<tr class="row-even"><td><p>4 (cabang kiri-kiri-kiri)</p></td>
+<td><p>Node 17 ≤ 3,50</p></td>
+<td><p>Kolom 21</p></td>
+<td><p>Pengaruh proyek/kegiatan terhadap keberhasilan</p></td>
+<td><p>(belum di-<em>expand</em> lebih lanjut)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="interpretasi">
+<h3>Interpretasi<a class="headerlink" href="#interpretasi" title="Link to this heading">#</a></h3>
+<p><strong>1. Cumulative GPA Semester Lalu sebagai Root Node</strong></p>
+<p>Atribut yang menjadi pemisah pertama dan paling dominan pada model ini adalah <strong>Cumulative GPA semester sebelumnya</strong>, bukan atribut kebiasaan belajar harian seperti kehadiran atau frekuensi membaca. Hal ini cukup masuk akal secara akademis, karena performa akademik mahasiswa umumnya bersifat konsisten dari semester ke semester — mahasiswa dengan riwayat IPK rendah cenderung melanjutkan pola nilai yang rendah pula pada semester berikutnya, dan sebaliknya. Root node ini secara efektif membagi mahasiswa menjadi dua kelompok besar: mereka dengan riwayat GPA rendah-menengah (≤ 4,50) sebanyak 96 dari 116 data latih, dan kelompok dengan riwayat GPA lebih tinggi (&gt; 4,50) sebanyak 20 data.</p>
+</section>
+</section>
+<section id="kesimpulan">
+<h2>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Penerapan Data Mining Efektif:</strong> Data mining, khususnya algoritma <em>machine learning</em>, dapat digunakan untuk merancang prediksi mengenai performa akademik mahasiswa berdasarkan histori data pribadi, keluarga, dan akademik mereka.</p></li>
+<li><p><strong>Keandalan Decision Tree pada Kasus Multi-Kelas:</strong> Model Decision Tree dengan <em>quality measure</em> Gain Ratio berhasil dibangun untuk mengklasifikasikan <code class="docutils literal notranslate"><span class="pre">OUTPUT</span> <span class="pre">Grade</span></code> yang terdiri dari 8 kategori nilai. Namun, model ini hanya mencapai akurasi sebesar <strong>41,4%</strong> dengan Cohen’s Kappa <strong>0,307</strong> (“Fair Agreement”), yang menunjukkan bahwa performa klasifikasi masih tergolong rendah, terutama disebabkan oleh kompleksitas target 8 kelas serta jumlah data yang relatif terbatas (145 baris).</p></li>
+<li><p><strong>Cumulative GPA sebagai Prediktor Utama:</strong> Berbeda dengan asumsi umum bahwa kehadiran atau kebiasaan belajar harian menjadi faktor paling dominan, hasil rule set model justru menunjukkan bahwa <strong>Cumulative GPA semester sebelumnya</strong> merupakan atribut yang paling berpengaruh sebagai root node. Hal ini mengindikasikan bahwa riwayat akademik mahasiswa merupakan indikator terkuat untuk memprediksi performa mereka selanjutnya.</p></li>
+<li><p><strong>Peran Faktor Keluarga dan Kebiasaan Belajar sebagai Faktor Sekunder:</strong> Faktor seperti ekspektasi GPA pribadi, tingkat pendidikan ibu, dan jam belajar mingguan muncul sebagai pemisah pada level-level berikutnya dalam pohon keputusan, menunjukkan bahwa faktor-faktor tersebut tetap berkontribusi meskipun tidak sedominan riwayat akademik.</p></li>
+<li><p><strong>Potensi sebagai Alat Peringatan Dini:</strong> Meskipun akurasi model belum optimal, pola-pola yang teridentifikasi dari struktur pohon keputusan tetap dapat dimanfaatkan sebagai dasar awal bagi dosen maupun institusi untuk mengenali mahasiswa yang berisiko mengalami penurunan performa akademik, khususnya mereka yang memiliki riwayat GPA rendah.</p></li>
+</ol>
+</section>
+<section id="saran">
+<h2>Saran<a class="headerlink" href="#saran" title="Link to this heading">#</a></h2>
+<p><strong>Bagi Mahasiswa:</strong> Mahasiswa disarankan untuk memperhatikan konsistensi performa akademiknya dari semester ke semester, mengingat riwayat Cumulative GPA terbukti menjadi faktor paling berpengaruh terhadap nilai yang akan diperoleh berikutnya. Selain itu, penetapan ekspektasi GPA pribadi yang realistis serta peningkatan jam belajar mandiri tetap perlu dijaga sebagai faktor pendukung, khususnya bagi mahasiswa dengan riwayat akademik yang belum stabil.</p>
+<p><strong>Bagi Dosen/Institusi:</strong> Dosen dan pihak akademik disarankan untuk memanfaatkan data riwayat akademik mahasiswa (seperti IPK semester sebelumnya) sebagai indikator awal dalam mengidentifikasi mahasiswa yang berisiko mengalami penurunan performa, sehingga bimbingan akademik dapat diberikan secara lebih tepat sasaran sejak awal semester.</p>
+<p><strong>Bagi Peneliti Selanjutnya:</strong> Mengingat akurasi model pada penelitian ini masih tergolong rendah (41,4%), penelitian berikutnya disarankan untuk mencoba metode klasifikasi lain (misalnya Naive Bayes atau Random Forest) sebagai pembanding, menerapkan teknik <em>pruning</em> pada Decision Tree untuk mengurangi kompleksitas pohon, serta mempertimbangkan penambahan jumlah data agar model memiliki generalisasi yang lebih baik, khususnya pada kelas-kelas nilai dengan jumlah data yang minim.</p>
+</section>
+<section id="daftar-pustaka">
+<h2>Daftar Pustaka<a class="headerlink" href="#daftar-pustaka" title="Link to this heading">#</a></h2>
+<p>Yilmaz, N., &amp; Şekeroğlu, B. (2019). Higher Education Students Performance Evaluation [Dataset]. UCI Machine Learning Repository. <a class="reference external" href="https://doi.org/10.24432/C51G82">https://doi.org/10.24432/C51G82</a></p>
+<p>Quinlan, J. R. (1986). Induction of Decision Trees. <em>Machine Learning</em>, 1(1), 81–106.</p>
+<p>Han, J., Kamber, M., &amp; Pei, J. (2011). <em>Data Mining: Concepts and Techniques</em> (3rd ed.). Morgan Kaufmann.</p>
+<p>KNIME AG. (n.d.). <em>Decision Tree Learner Node Documentation</em>. KNIME Analytics Platform. <a class="reference external" href="https://hub.knime.com">https://hub.knime.com</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./md"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="12_Tugas_model.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Model Explainability dengan Skforecast</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">Pendahuluan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding">Business Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">Data Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">Data Preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-dataset">Import Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konversi-tipe-data-target">Konversi Tipe Data Target</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#column-filter-seleksi-atribut">Column Filter (Seleksi Atribut)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pembagian-data-table-partitioner">Pembagian Data (Table Partitioner)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catatan-normalisasi">Catatan Normalisasi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metode-yang-digunakan">Metode yang Digunakan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">Workflow KNIME</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-decision-tree-learner">Konfigurasi Decision Tree Learner</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-evaluasi-model">Hasil Evaluasi Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-faktor-yang-mempengaruhi-nilai-mahasiswa">Analisis Faktor yang Mempengaruhi Nilai Mahasiswa</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urutan-atribut-pemisah-splitter-pada-level-teratas">Urutan Atribut Pemisah (Splitter) pada Level Teratas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi">Interpretasi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saran">Saran</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daftar-pustaka">Daftar Pustaka</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alif Baiatur Ridhwan El Habibie
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

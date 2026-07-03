@@ -12,7 +12,7 @@ chapters:
 - file: md/05_tugas5_missing
   title: "Proyek Missing Values Inputation + Materi Normalisasi data"
 - file: md/06_uts
-  title: "Laporan UTS Pengantar Data Mining"
+  title: "UTS Pengantar Data Mining"
 - file: md/07_naivebayes
   title: "Analisis Data Menggunakan Naive Bayes"
 - file: md/09_random_forest
@@ -23,3 +23,5 @@ chapters:
   title: "PERAMALAN KADAR NITROGEN DIOKSIDA (NOâ‚‚) DI KABUPATEN BOJONEGORO MENGGUNAKAN METODE KNN REGRESSION"
 - file: md/12_Tugas_model
   title: "Model Explainability dengan Skforecast"
+- file: md/13_UAS_datamining
+  title: "UAS Data Mining: Prediksi Performa Akademik Mahasiswa Menggunakan Decision Tree"

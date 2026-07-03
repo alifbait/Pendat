@@ -2,7 +2,6 @@
 
 ## Latar Belakang
 
----
 
 Nitrogen Dioksida (NO₂) merupakan salah satu jenis polutan udara yang dihasilkan dari proses pembakaran bahan bakar fosil, kendaraan bermotor, aktivitas industri, serta pembangkit energi. Konsentrasi NO₂ yang tinggi di atmosfer dapat memberikan dampak negatif terhadap kesehatan manusia maupun lingkungan. Paparan gas NO₂ secara terus menerus dapat menyebabkan gangguan sistem pernapasan, iritasi paru-paru, serta memperburuk penyakit asma dan bronkitis.
 
@@ -13,8 +12,6 @@ Pemanfaatan teknologi penginderaan jauh menggunakan satelit Sentinel-5P memungki
 Pada penelitian ini digunakan metode K-Nearest Neighbor (KNN) Regression untuk melakukan prediksi kadar Nitrogen Dioksida (NO₂) di Kabupaten Bojonegoro. Data yang digunakan diperoleh melalui OpenEO API dengan memanfaatkan data satelit Sentinel-5P dalam rentang waktu dua tahun.
 
 ## 1. Pengumpulan Data
-
----
 
 Pada tahap ini dilakukan proses pengambilan data time series harian kadar Nitrogen Dioksida (NO₂) di wilayah Kabupaten Bojonegoro menggunakan data satelit Sentinel-5P. Data diperoleh melalui layanan OpenEO API yang terhubung dengan Copernicus Data Space Ecosystem.
 
@@ -36,7 +33,6 @@ Pada penelitian ini digunakan data kadar NO₂ harian di wilayah Kabupaten Bojon
 
 ### Install Library OpenEO
 
----
 
 Sebelum melakukan proses pengambilan data satelit, terlebih dahulu dilakukan instalasi library `openeo`. Library ini digunakan untuk menghubungkan Python dengan layanan OpenEO API agar dapat mengambil data satelit Sentinel-5P secara langsung.
 

@@ -63,6 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'md/12_Tugas_model';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="UAS Data Mining: Prediksi Performa Akademik Mahasiswa Menggunakan Decision Tree" href="13_UAS_datamining.html" />
     <link rel="prev" title="PERAMALAN KADAR NITROGEN DIOKSIDA (NO₂) DI KABUPATEN BOJONEGORO MENGGUNAKAN METODE KNN REGRESSION" href="11_TugasOpenEO.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -173,7 +174,7 @@
 <li class="toctree-l1"><a class="reference internal" href="03_tugas3.html">Data Preparation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_tugas4_jarak.html">Perhitungan Jarak Data Campuran</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_tugas5_missing.html">Proyek Missing Values Inputation + Materi Normalisasi data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_uts.html">Laporan UTS Pengantar Data Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_uts.html">UTS Pengantar Data Mining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_naivebayes.html">Analisis Data Menggunakan Naive Bayes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09_random_forest.html">Analisa Data Menggunakan Random Forest untuk Prediksi pada Dataset Diabetes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="10_analisa_regres_ilinier.html">Analisis Data Menggunakan Regresi Linier</a></li>
@@ -200,6 +201,7 @@
 
 <li class="toctree-l1"><a class="reference internal" href="11_TugasOpenEO.html">PERAMALAN KADAR NITROGEN DIOKSIDA (NOâ‚‚) DI KABUPATEN BOJONEGORO MENGGUNAKAN METODE KNN REGRESSION</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Model Explainability dengan Skforecast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_UAS_datamining.html">UAS Data Mining: Prediksi Performa Akademik Mahasiswa Menggunakan Decision Tree</a></li>
 </ul>
 
     </div>
@@ -509,57 +511,59 @@ k
 <h2>4. Jelaskan Proses Analisis yang Dilakukan<a class="headerlink" href="#jelaskan-proses-analisis-yang-dilakukan" title="Link to this heading">#</a></h2>
 <section id="cell-1-instalasi-library">
 <h3>Cell 1 - Instalasi Library<a class="headerlink" href="#cell-1-instalasi-library" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">shap</span> <span class="n">lightgbm</span> <span class="n">skforecast</span>
-</pre></div>
-</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: shap in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (0.52.0)
-Requirement already satisfied: lightgbm in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (4.6.0)
-Requirement already satisfied: skforecast in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (0.22.0)
-Requirement already satisfied: numpy&gt;=2 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (2.2.6)
-Requirement already satisfied: scipy in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (1.16.0)
-Requirement already satisfied: scikit-learn in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (1.7.0)
-Requirement already satisfied: pandas in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (2.3.1)
-Requirement already satisfied: tqdm&gt;=4.27.0 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (4.68.2)
-Requirement already satisfied: packaging&gt;20.9 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (25.0)
-Requirement already satisfied: slicer==0.0.8 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (0.0.8)
-Requirement already satisfied: numba in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (0.65.1)
-Requirement already satisfied: llvmlite in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (0.47.0)
-Requirement already satisfied: cloudpickle in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (3.1.2)
-Requirement already satisfied: optuna&gt;=4.0 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from skforecast) (4.9.0)
-Requirement already satisfied: joblib&gt;=1.3 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from skforecast) (1.5.1)
-Requirement already satisfied: rich&gt;=13.9 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from skforecast) (15.0.0)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from pandas-&gt;shap) (2.9.0.post0)
-Requirement already satisfied: pytz&gt;=2020.1 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from pandas-&gt;shap) (2025.2)
-Requirement already satisfied: tzdata&gt;=2022.7 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from pandas-&gt;shap) (2025.2)
-Requirement already satisfied: alembic&gt;=1.5.0 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from optuna&gt;=4.0-&gt;skforecast) (1.18.4)
-Requirement already satisfied: colorlog in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from optuna&gt;=4.0-&gt;skforecast) (6.10.1)
-Requirement already satisfied: sqlalchemy&gt;=1.4.2 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from optuna&gt;=4.0-&gt;skforecast) (2.0.50)
-Requirement already satisfied: PyYAML in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from optuna&gt;=4.0-&gt;skforecast) (6.0.3)
-Requirement already satisfied: Mako in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from alembic&gt;=1.5.0-&gt;optuna&gt;=4.0-&gt;skforecast) (1.3.12)
-Requirement already satisfied: typing-extensions&gt;=4.12 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from alembic&gt;=1.5.0-&gt;optuna&gt;=4.0-&gt;skforecast) (4.14.1)
-Requirement already satisfied: six&gt;=1.5 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas-&gt;shap) (1.17.0)
-Requirement already satisfied: markdown-it-py&gt;=2.2.0 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from rich&gt;=13.9-&gt;skforecast) (4.2.0)
-Requirement already satisfied: pygments&lt;3.0.0,&gt;=2.13.0 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from rich&gt;=13.9-&gt;skforecast) (2.19.2)
-Requirement already satisfied: mdurl~=0.1 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from markdown-it-py&gt;=2.2.0-&gt;rich&gt;=13.9-&gt;skforecast) (0.1.2)
-Requirement already satisfied: threadpoolctl&gt;=3.1.0 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from scikit-learn-&gt;shap) (3.6.0)
-Requirement already satisfied: greenlet&gt;=1 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from sqlalchemy&gt;=1.4.2-&gt;optuna&gt;=4.0-&gt;skforecast) (3.5.1)
-Requirement already satisfied: colorama in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from tqdm&gt;=4.27.0-&gt;shap) (0.4.6)
-Requirement already satisfied: MarkupSafe&gt;=0.9.2 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from Mako-&gt;alembic&gt;=1.5.0-&gt;optuna&gt;=4.0-&gt;skforecast) (3.0.2)
+<p>!pip install shap lightgbm skforecast</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+    Requirement already satisfied: shap in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (0.52.0)
+    Requirement already satisfied: lightgbm in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (4.6.0)
+    Requirement already satisfied: skforecast in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (0.22.0)
+    Requirement already satisfied: numpy&gt;=2 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (2.2.6)
+    Requirement already satisfied: scipy in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (1.16.0)
+    Requirement already satisfied: scikit-learn in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (1.7.0)
+    Requirement already satisfied: pandas in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (2.3.1)
+    Requirement already satisfied: tqdm&gt;=4.27.0 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (4.68.2)
+    Requirement already satisfied: packaging&gt;20.9 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (25.0)
+    Requirement already satisfied: slicer==0.0.8 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (0.0.8)
+    Requirement already satisfied: numba in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (0.65.1)
+    Requirement already satisfied: llvmlite in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (0.47.0)
+    Requirement already satisfied: cloudpickle in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from shap) (3.1.2)
+    Requirement already satisfied: optuna&gt;=4.0 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from skforecast) (4.9.0)
+    Requirement already satisfied: joblib&gt;=1.3 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from skforecast) (1.5.1)
+    Requirement already satisfied: rich&gt;=13.9 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from skforecast) (15.0.0)
+    Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from pandas-&gt;shap) (2.9.0.post0)
+    Requirement already satisfied: pytz&gt;=2020.1 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from pandas-&gt;shap) (2025.2)
+    Requirement already satisfied: tzdata&gt;=2022.7 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from pandas-&gt;shap) (2025.2)
+    Requirement already satisfied: alembic&gt;=1.5.0 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from optuna&gt;=4.0-&gt;skforecast) (1.18.4)
+    Requirement already satisfied: colorlog in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from optuna&gt;=4.0-&gt;skforecast) (6.10.1)
+    Requirement already satisfied: sqlalchemy&gt;=1.4.2 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from optuna&gt;=4.0-&gt;skforecast) (2.0.50)
+    Requirement already satisfied: PyYAML in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from optuna&gt;=4.0-&gt;skforecast) (6.0.3)
+    Requirement already satisfied: Mako in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from alembic&gt;=1.5.0-&gt;optuna&gt;=4.0-&gt;skforecast) (1.3.12)
+    Requirement already satisfied: typing-extensions&gt;=4.12 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from alembic&gt;=1.5.0-&gt;optuna&gt;=4.0-&gt;skforecast) (4.14.1)
+    Requirement already satisfied: six&gt;=1.5 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas-&gt;shap) (1.17.0)
+    Requirement already satisfied: markdown-it-py&gt;=2.2.0 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from rich&gt;=13.9-&gt;skforecast) (4.2.0)
+    Requirement already satisfied: pygments&lt;3.0.0,&gt;=2.13.0 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from rich&gt;=13.9-&gt;skforecast) (2.19.2)
+    Requirement already satisfied: mdurl~=0.1 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from markdown-it-py&gt;=2.2.0-&gt;rich&gt;=13.9-&gt;skforecast) (0.1.2)
+    Requirement already satisfied: threadpoolctl&gt;=3.1.0 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from scikit-learn-&gt;shap) (3.6.0)
+    Requirement already satisfied: greenlet&gt;=1 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from sqlalchemy&gt;=1.4.2-&gt;optuna&gt;=4.0-&gt;skforecast) (3.5.1)
+    Requirement already satisfied: colorama in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from tqdm&gt;=4.27.0-&gt;shap) (0.4.6)
+    Requirement already satisfied: MarkupSafe&gt;=0.9.2 in c:\users\hp\appdata\local\programs\python\python313\lib\site-packages (from Mako-&gt;alembic&gt;=1.5.0-&gt;optuna&gt;=4.0-&gt;skforecast) (3.0.2)
+    
+
+    
+    [notice] A new release of pip is available: 25.3 -&gt; 26.1.2
+    [notice] To update, run: python.exe -m pip install --upgrade pip
+    
+
+![image.png](../img/c9f92ad3-9754-47bf-a306-04fb251bf8cb.png)
 
 
+```python
+Penjelasan
 
-[notice] A new release of pip is available: 25.3 -&gt; 26.1.2
-[notice] To update, run: python.exe -m pip install --upgrade pip
-</pre></div>
-</div>
-<p><img alt="image.png" src="../_images/c9f92ad3-9754-47bf-a306-04fb251bf8cb.png" /></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Penjelasan</span>
+Cell ini digunakan untuk menginstal library yang diperlukan selama proses analisis.
 
-<span class="n">Cell</span> <span class="n">ini</span> <span class="n">digunakan</span> <span class="n">untuk</span> <span class="n">menginstal</span> <span class="n">library</span> <span class="n">yang</span> <span class="n">diperlukan</span> <span class="n">selama</span> <span class="n">proses</span> <span class="n">analisis</span><span class="o">.</span>
-
-<span class="n">SHAP</span> <span class="n">digunakan</span> <span class="n">untuk</span> <span class="n">menjelaskan</span> <span class="n">hasil</span> <span class="n">prediksi</span> <span class="n">model</span><span class="o">.</span>
-<span class="n">LightGBM</span> <span class="n">digunakan</span> <span class="n">sebagai</span> <span class="n">algoritma</span> <span class="n">machine</span> <span class="n">learning</span><span class="o">.</span>
-<span class="n">Skforecast</span> <span class="n">digunakan</span> <span class="n">untuk</span> <span class="n">forecasting</span> <span class="n">time</span> <span class="n">series</span><span class="o">.</span>
+SHAP digunakan untuk menjelaskan hasil prediksi model.
+LightGBM digunakan sebagai algoritma machine learning.
+Skforecast digunakan untuk forecasting time series.
 </pre></div>
 </div>
 </section>
@@ -1025,7 +1029,7 @@ Menampilkan summary plot dalam bentuk bar chart. Setiap bar merepresentasikan ra
   );
 </script></body>
 </html>
-<p><img alt="image.png" src="md/5db69a7f-2e03-4a73-b3bb-cb00a57cc6fe.png" /></p>
+<p><img alt="image.png" src="../_images/5db69a7f-2e03-4a73-b3bb-cb00a57cc6fe.png" /></p>
 <p>penjelasan</p>
 <p>Menampilkan force plot untuk observasi pertama (index 0) dari data training. Force plot adalah visualisasi lokal yang menunjukkan bagaimana masing-masing fitur mendorong prediksi ke atas atau ke bawah dari nilai baseline (explainer.expected_value).</p>
 <p>Karena shap.force_plot memerlukan JavaScript untuk dirender, visualisasi dibungkus secara manual menggunakan shap.getjs() dan display(HTML(…)) agar dapat tampil dengan benar di lingkungan Colab yang tidak memuat JS SHAP secara otomatis.</p>
@@ -1464,6 +1468,15 @@ Freq: D, Name: pred, dtype: float64
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">PERAMALAN KADAR NITROGEN DIOKSIDA (NO₂) DI KABUPATEN BOJONEGORO MENGGUNAKAN METODE KNN REGRESSION</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="13_UAS_datamining.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">UAS Data Mining: Prediksi Performa Akademik Mahasiswa Menggunakan Decision Tree</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

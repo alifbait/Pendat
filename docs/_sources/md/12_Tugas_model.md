@@ -63,7 +63,6 @@ k
 ### Cell 1 - Instalasi Library
 
 
-```python
 !pip install shap lightgbm skforecast
 ```
 
@@ -680,7 +679,7 @@ display(HTML(html_content))
 
 
 
-![image.png](5db69a7f-2e03-4a73-b3bb-cb00a57cc6fe.png)
+![image.png](../img/5db69a7f-2e03-4a73-b3bb-cb00a57cc6fe.png)
 
 penjelasan
 
