@@ -6,7 +6,7 @@ chapters:
 - file: md/02_tugas2
   title: "Data Understanding"
 - file: md/03_tugas3
-  title: "Data Preparation"
+  title: "Data Preperation"
 - file: md/04_tugas4_jarak
   title: "Perhitungan Jarak Data Campuran"
 - file: md/05_tugas5_missing
@@ -15,6 +15,8 @@ chapters:
   title: "UTS Pengantar Data Mining"
 - file: md/07_naivebayes
   title: "Analisis Data Menggunakan Naive Bayes"
+- file: md/08_analisa_decicion_tree
+  title: "Analisis Data Menggunakan Decision Tree"
 - file: md/09_random_forest
   title: "Analisa Data Menggunakan Random Forest untuk Prediksi pada Dataset Diabetes"
 - file: md/10_analisa_regres_ilinier

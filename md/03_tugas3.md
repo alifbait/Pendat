@@ -13,7 +13,7 @@ Pada tahap ini dilakukan pemilihan data yang akan digunakan dalam proses analisi
 
 ## 2. Membersihkan Data
 
-#### - Cek Missing Value
+### Cek Missing Value
 
 | Atribut | Missing Value |
 |------|------|
@@ -25,7 +25,7 @@ Pada tahap ini dilakukan pemilihan data yang akan digunakan dalam proses analisi
 
 Berdasarkan hasil pemeriksaan pada data understanding, seluruh atribut memiliki nilai 0 pada missing value. Hal ini menunjukkan bahwa dataset sudah lengkap dan tidak memerlukan penanganan missing value.
 
-#### - Cek Data Duplikat
+### Cek Data Duplikat
 
 Berdasarkan hasil pemeriksaan pada data understanding, terdapat 3 data duplikat pada dataset. Data tersebut kemudian akan dihapus pada tahap pembersihan data untuk memastikan kualitas dataset tetap baik.
 
